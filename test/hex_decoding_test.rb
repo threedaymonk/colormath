@@ -34,6 +34,20 @@ class HexDecodingTest < Test::Unit::TestCase
     assert_in_delta (0xcc / 255.0), c.blue,  EPSILON
   end
 
+  should "decode 6-digit hex string in upper case" do
+    c = ColorMath::hex_color("#ABCD54")
+    assert_in_delta (0xab / 255.0), c.red,   EPSILON
+    assert_in_delta (0xcd / 255.0), c.green, EPSILON
+    assert_in_delta (0x54 / 255.0), c.blue,  EPSILON
+  end
+
+  should "decode 3-digit hex string in upper case" do
+    c = ColorMath::hex_color("#A1C")
+    assert_in_delta (0xaa / 255.0), c.red,   EPSILON
+    assert_in_delta (0x11 / 255.0), c.green, EPSILON
+    assert_in_delta (0xcc / 255.0), c.blue,  EPSILON
+  end
+
   should "raise a ParsingError when the hex string is invalid" do
     assert_raises ColorMath::ParsingError do
       ColorMath::hex_color("kjhhdfs")
