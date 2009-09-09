@@ -20,3 +20,4 @@ end
 
 require "colormath/color"
 require "colormath/blend"
+require "colormath/version"
