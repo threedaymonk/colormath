@@ -1,5 +1,5 @@
 module ColorMath
-  class Color
+  module Color
     EPSILON = 1/256.0
 
     def ==(other)

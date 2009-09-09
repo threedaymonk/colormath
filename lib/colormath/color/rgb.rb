@@ -1,5 +1,7 @@
 module ColorMath
-  class RGB < Color
+  class RGB
+    include Color
+
     attr_reader :red, :green, :blue
 
     def initialize(r, g, b)

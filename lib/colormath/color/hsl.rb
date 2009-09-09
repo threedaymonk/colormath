@@ -1,5 +1,7 @@
 module ColorMath
-  class HSL < Color
+  class HSL
+    include Color
+
     attr_reader :hue, :saturation, :luminance, :alpha
 
     def initialize(h, s, l)
