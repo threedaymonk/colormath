@@ -33,4 +33,10 @@ class HexDecodingTest < Test::Unit::TestCase
     assert_in_delta (0x11 / 255.0), c.green, EPSILON
     assert_in_delta (0xcc / 255.0), c.blue,  EPSILON
   end
+
+  should "raise a ParsingError when the hex string is invalid" do
+    assert_raises ColorMath::ParsingError do
+      ColorMath::hex_color("kjhhdfs")
+    end
+  end
 end
