@@ -1,6 +1,11 @@
 module ColorMath
   ParsingError = Class.new(RuntimeError)
 
+  # Instantiate an RGB colour from a 3- or 6-digit hexadecimal representation.
+  # "#abc", "#abcdef", "abc", and "abcdef" are all valid.
+  #
+  # Invalid representations will raise a ParsingError.
+  #
   def hex_color(s)
     if m = s.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
       RGB.new( m[1].to_i(16) / 255.0,

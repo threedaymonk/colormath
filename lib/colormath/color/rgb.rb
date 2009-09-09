@@ -1,15 +1,27 @@
 module ColorMath
+
+  # A colour represented and stored as red, green and blue components
+  #
   class RGB
     include Color
 
     attr_reader :red, :green, :blue
 
+    # Initialize an RGB colour where:
+    #     0 <= r <= 1
+    #     0 <= g <= 1
+    #     0 <= b <= 1
+    #
+    # Values outside these ranges will be clippped.
+    #
     def initialize(r, g, b)
       @red   = force_range(r, 0, 1).to_f
       @green = force_range(g, 0, 1).to_f
       @blue  = force_range(b, 0, 1).to_f
     end
 
+    # The hue component of the colour in HSL representation where 0 <= h < 360
+    #
     def hue
       case max
       when red
@@ -21,6 +33,8 @@ module ColorMath
       end
     end
 
+    # The saturation component of the colour in HSL representation where 0 <= s <= 1
+    #
     def saturation
       if max == min
         0
@@ -31,6 +45,8 @@ module ColorMath
       end
     end
 
+    # The luminance component of the colour in HSL representation where 0 <= l <= 1
+    #
     def luminance
       0.5 * (max + min)
     end
