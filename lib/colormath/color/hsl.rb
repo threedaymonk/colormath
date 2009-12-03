@@ -12,10 +12,11 @@ module ColorMath
     #     0 <= s <=   1
     #     0 <= l <=   1
     #
-    # Values outside these ranges will be clippped.
+    # Saturation and luminance values outside these ranges will be clipped.
+    # Hue values will be mapped to a circle, so that e.g. -20 becomes 340.
     #
     def initialize(h, s, l)
-      @hue        = force_range(h, 0, 360).to_f
+      @hue        = h % 360
       @saturation = force_range(s, 0,   1).to_f
       @luminance  = force_range(l, 0,   1).to_f
     end

@@ -14,12 +14,12 @@ class HSLTest < Test::Unit::TestCase
 
   should "force hue >= 0" do
     c = ColorMath::HSL.new(-2, 0, 0)
-    assert_equal 0, c.hue
+    assert_equal 358, c.hue
   end
 
   should "force hue <= 360" do
     c = ColorMath::HSL.new(361, 0, 0)
-    assert_equal 360, c.hue
+    assert_equal 1, c.hue
   end
 
   should "force saturation >= 0" do
