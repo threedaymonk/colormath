@@ -23,6 +23,7 @@ module ColorMath
     # The hue component of the colour in HSL representation where 0 <= h < 360
     #
     def hue
+      return 0 if saturation.zero?
       case max
       when red
         (60.0 * ((green - blue) / (max - min))) % 360.0

@@ -41,4 +41,9 @@ class RGBTest < Test::Unit::TestCase
     c = ColorMath::RGB.new(0, 0, 1.1)
     assert_equal 1, c.blue
   end
+
+  should "have a hue of zero if it is white" do
+    c = ColorMath::RGB.new(1, 1, 1)
+    assert_equal 0, c.hue
+  end
 end
