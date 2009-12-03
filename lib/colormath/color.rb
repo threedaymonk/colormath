@@ -10,6 +10,17 @@ module ColorMath
       "#%02x%02x%02x" % [red * 0xff, green * 0xff, blue * 0xff]
     end
 
+    # The hexadecimal representation of the colour, using 3 digits if possible
+    #
+    def compact_hex
+      case h = hex
+      when /^#(.)\1(.)\2(.)\3$/
+        "##$1#$2#$3"
+      else
+        h
+      end
+    end
+
     def inspect(*args)
       "<%s r=%0.3f g=%0.3f b=%0.3f>" % [self.class.to_s, red, green, blue]
     end
