@@ -4,14 +4,6 @@ require "shoulda"
 require "colormath"
 
 class HSLTest < Test::Unit::TestCase
-  should "be equal if initialized with same values" do
-    assert_equal ColorMath::HSL.new(123, 0.5, 0.7), ColorMath::HSL.new(123, 0.5, 0.7)
-  end
-
-  should "not be equal if initialized with different values" do
-    assert_not_equal ColorMath::HSL.new(124, 0.4, 0.8), ColorMath::HSL.new(123, 0.5, 0.7)
-  end
-
   should "force hue >= 0" do
     c = ColorMath::HSL.new(-2, 0, 0)
     assert_equal 358, c.hue
