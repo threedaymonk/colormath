@@ -24,5 +24,6 @@ module ColorMath
 end
 
 require "colormath/color"
+require "colormath/adjust"
 require "colormath/blend"
 require "colormath/version"
