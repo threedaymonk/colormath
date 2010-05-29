@@ -17,31 +17,31 @@ module ColorMath
     #
     def initialize(h, s, l)
       @hue        = h % 360
-      @saturation = force_range(s, 0,   1).to_f
-      @luminance  = force_range(l, 0,   1).to_f
+      @saturation = force_range(s, 0, 1).to_f
+      @luminance  = force_range(l, 0, 1).to_f
     end
 
     # The red component of the colour in RGB representation where 0 <= r <= 1
     #
     def red
-      t = component(hk + (1/3.0))
+      @red ||= component(hk + (1/3.0))
     end
 
     # The green component of the colour in RGB representation where 0 <= g <= 1
     #
     def green
-      t = component(hk)
+      @green ||= component(hk)
     end
 
     # The blue component of the colour in RGB representation where 0 <= b <= 1
     #
     def blue
-      t = component(hk - (1/3.0))
+      @blue ||= component(hk - (1/3.0))
     end
 
   private
     def hk
-      hue / 360.0
+      @hk ||= hue / 360.0
     end
 
     def q
@@ -57,19 +57,17 @@ module ColorMath
     end
 
     def component(t)
-      t = if t < 0
-        t + 1.0
+      if t < 0
+        t += 1.0
       elsif t > 1
-        t - 1.0
-      else
-        t
+        t -= 1.0
       end
 
       if t < (1/6.0)
         p + ((q - p) * 6.0 * t)
-      elsif (1/6.0) <= t && t < 0.5
+      elsif t < 0.5
         q
-      elsif 0.5 <= t && t < (2/3.0)
+      elsif t < (2/3.0)
         p + ((q - p) * 6.0 * (2/3.0 - t))
       else
         p
