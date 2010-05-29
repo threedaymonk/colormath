@@ -23,21 +23,24 @@ module ColorMath
     # The hue component of the colour in HSL representation where 0 <= h < 360
     #
     def hue
-      return 0 if saturation.zero?
-      case max
-      when red
-        (60.0 * ((green - blue) / (max - min))) % 360.0
-      when green
-        60.0 * ((blue - red) / (max - min)) + 120.0
-      when blue
-        60.0 * ((red - green) / (max - min)) + 240.0
+      @hue ||= if saturation.zero?
+        0
+      else
+        case max
+        when red
+          (60.0 * ((green - blue) / (max - min))) % 360.0
+        when green
+          60.0 * ((blue - red) / (max - min)) + 120.0
+        when blue
+          60.0 * ((red - green) / (max - min)) + 240.0
+        end
       end
     end
 
     # The saturation component of the colour in HSL representation where 0 <= s <= 1
     #
     def saturation
-      if max == min
+      @saturation ||= if max == min
         0
       elsif luminance <= 0.5
         (max - min) / (2.0 * luminance)
@@ -49,16 +52,16 @@ module ColorMath
     # The luminance component of the colour in HSL representation where 0 <= l <= 1
     #
     def luminance
-      0.5 * (max + min)
+      @luminance ||= 0.5 * (max + min)
     end
 
   private
     def min
-      [red, green, blue].min
+      @min ||= [red, green, blue].min
     end
 
     def max
-      [red, green, blue].max
+      @max ||= [red, green, blue].max
     end
   end
 end
