@@ -57,11 +57,7 @@ module ColorMath
     end
 
     def component(t)
-      if t < 0
-        t += 1.0
-      elsif t > 1
-        t -= 1.0
-      end
+      t = t % 1
 
       if t < (1/6.0)
         p + ((q - p) * 6.0 * t)
