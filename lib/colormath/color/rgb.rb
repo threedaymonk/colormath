@@ -12,7 +12,7 @@ module ColorMath
     #     0 <= g <= 1
     #     0 <= b <= 1
     #
-    # Values outside these ranges will be clippped.
+    # Values outside these ranges will be clipped.
     #
     def initialize(r, g, b)
       @red   = force_range(r, 0, 1).to_f
